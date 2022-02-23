@@ -18,7 +18,6 @@ public class Tesla extends Carro {
 
 	public Tesla(String marca, String modelo) {
 		super(marca, modelo);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean isDirigirSozinho() {

@@ -33,7 +33,7 @@ public class BMW extends Carro implements Conversivel, Utilitario {
 
 	@Override
 	public void passear() {
-		// TODO Auto-generated method stub
+		System.out.println("Dirigindo meu carro");
 		
 	}
 		
