@@ -3,6 +3,7 @@ package com.example.demo.repositories;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.example.demo.DAO.UsuarioDAO;
@@ -10,34 +11,37 @@ import com.example.demo.dto.UsuarioDTO;
 import com.example.demo.entities.UsuarioEntity;
 
 @Stateless
-public class UsuarioRepository extends UsuarioDAO {
+public class UsuarioRepository {
+
+    @Inject
+    UsuarioDAO usuarioDAO;
     
     public List<UsuarioEntity> listarUsuarios() {
-        return list();
+        return usuarioDAO.list();
     }
     
     public UsuarioEntity pegarUsuarioPorId(Long idUsuario) {
-        return findById(idUsuario);
+        return usuarioDAO.findById(idUsuario);
     }
 
     @Transactional
     public UsuarioEntity criarUsuario(UsuarioDTO usuarioDTO) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuarioDTO);
-        insert(usuarioEntity);
+        usuarioDAO.insert(usuarioEntity);
         return usuarioEntity;
     }
 
     @Transactional
     public UsuarioDTO atualizarUsuario(UsuarioDTO usuarioDTO) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuarioDTO);
-        usuarioEntity =  update(usuarioEntity);
+        usuarioEntity =  usuarioDAO.update(usuarioEntity);
         return new UsuarioDTO(usuarioEntity);
     }
     
     @Transactional
     public void deletarUsuario(Long idUsuario) { 
-        UsuarioEntity usuarioEntity = findById(idUsuario);
-        remove(usuarioEntity);
+        UsuarioEntity usuarioEntity = usuarioDAO.findById(idUsuario);
+        usuarioDAO.remove(usuarioEntity);
     }
 
 }

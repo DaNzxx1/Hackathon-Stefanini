@@ -3,8 +3,8 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import com.example.demo.dto.UsuarioDTO;
 import com.example.demo.entities.UsuarioEntity;
@@ -13,7 +13,7 @@ import com.example.demo.repositories.UsuarioRepository;
 @Stateless
 public class UsuarioService {
     
-    @Inject
+    @EJB
     UsuarioRepository usuarioRepository;
 
     public List<UsuarioDTO> listarUsuarios() {
