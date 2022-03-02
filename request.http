@@ -1,0 +1,1 @@
+POST http://localhost:8080/demo-1.0-SNAPSHOT/api/usuarios HTTP/1.1
