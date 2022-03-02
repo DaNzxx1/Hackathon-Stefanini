@@ -1,12 +1,15 @@
 package com.example.demo.resouces;
 
 import java.util.List;
+import java.util.Objects;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.example.demo.dto.UsuarioDTO;
+import com.example.demo.entities.UsuarioEntity;
 import com.example.demo.services.UsuarioService;
 
 @Path("usuarios")
@@ -14,33 +17,43 @@ import com.example.demo.services.UsuarioService;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UsuarioResouce {
 
-    @Inject
+    @EJB
     UsuarioService usuarioService;
     
     @GET
-    public List<UsuarioDTO> listarUsuarios() {
-        return usuarioService.listarUsuarios();
+    public Response listarUsuarios() {
+        List<UsuarioDTO> listaUsuarios = usuarioService.listarUsuarios();
+        return Response.status(Response.Status.OK).entity(listaUsuarios).build();
     }
     
     @GET
     @Path("/{idUsuario}")
-    public UsuarioDTO pegarUsuarioPorId(@PathParam("idUsuario") long idUsuario) {
-        return usuarioService.pegarUsuarioPorId(idUsuario);
+    public Response pegarUsuarioPorId(@PathParam("idUsuario") Long idUsuario) {
+        UsuarioDTO usuarioDTO = usuarioService.pegarUsuarioPorId(idUsuario);
+        return Response.status(Response.Status.OK).entity(usuarioDTO).build();
     }
 
     @POST
-    public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO) {
-        return usuarioService.criarUsuario(usuarioDTO);
+    public Response criarUsuario(UsuarioDTO usuarioDTO) {
+        UsuarioEntity usuarioEntity = new UsuarioEntity(usuarioService.criarUsuario(usuarioDTO));
+        if(Objects.nonNull(usuarioEntity)) {
+            return Response.ok(new UsuarioDTO(usuarioEntity)).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity("Ocorreu um erro ao processar sua requisição").build();
     }
 
     @PUT 
-    public UsuarioDTO atualizarUsuario(UsuarioDTO usuarioDTO) {
-        return usuarioService.atualizarUsuario(usuarioDTO);
+    public Response atualizarUsuario(UsuarioDTO usuarioDTO) {
+        UsuarioDTO usuarioDto = usuarioService.atualizarUsuario(usuarioDTO);
+        return Response.status(Response.Status.OK).entity(usuarioDto).build();
+        //return Response.status(Response.Status.NO_CONTENT).entity(dto).build();
     }
 
     @DELETE
-    public UsuarioDTO deletarUsuario(UsuarioDTO usuarioDTO) {
-        return usuarioService.deletarUsuario(usuarioDTO);
+    @Path("/{idUsuario}")
+    public Response deletarUsuario(@PathParam("idUsuario") Long idUsuario) {
+        usuarioService.deletarUsuario(idUsuario);
+        return Response.status(Response.Status.ACCEPTED).build();
     }
 
 }

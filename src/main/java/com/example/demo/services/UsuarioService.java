@@ -30,11 +30,11 @@ public class UsuarioService {
     }
 
     public UsuarioDTO atualizarUsuario(UsuarioDTO usuarioDTO) {
-        return new UsuarioDTO(usuarioRepository.atualizarUsuario(usuarioDTO));
+        return usuarioRepository.atualizarUsuario(usuarioDTO);
     }
 
-    public UsuarioDTO deletarUsuario(UsuarioDTO UsuarioDTO) {
-        return new UsuarioDTO(usuarioRepository.deletarUsuario(UsuarioDTO));
+    public void deletarUsuario(Long idUsuario) {
+        usuarioRepository.deletarUsuario(idUsuario);
     }
 
 }
