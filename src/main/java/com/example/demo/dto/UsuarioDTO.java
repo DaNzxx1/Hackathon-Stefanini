@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 import javax.validation.constraints.NotNull;
 
+import com.example.demo.entities.ProdutoEntity;
 import com.example.demo.entities.UsuarioEntity;
 
 public class UsuarioDTO {
@@ -17,6 +18,8 @@ public class UsuarioDTO {
     @NotNull(message = "Informe a Senha!")
     private String senha;
 
+    @NotNull(message = "Informe o Produto!")
+    private ProdutoEntity produto;
 
     public UsuarioDTO() {
     }
@@ -26,6 +29,7 @@ public class UsuarioDTO {
         this.nome = usuarioEntity.getNome();
         this.email = usuarioEntity.getEmail();
         this.senha = usuarioEntity.getSenha();
+        this.produto = usuarioEntity.getProduto();
     }
 
     public Long getId() {
@@ -58,6 +62,14 @@ public class UsuarioDTO {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public ProdutoEntity getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoEntity produto) {
+        this.produto = produto;
     }
 
 }

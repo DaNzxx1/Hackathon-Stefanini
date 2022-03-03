@@ -2,8 +2,8 @@ package com.example.demo.repositories;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.example.demo.DAO.UsuarioDAO;
@@ -13,7 +13,7 @@ import com.example.demo.entities.UsuarioEntity;
 @Stateless
 public class UsuarioRepository {
 
-    @Inject
+    @EJB
     UsuarioDAO usuarioDAO;
     
     public List<UsuarioEntity> listarUsuarios() {

@@ -1,4 +1,4 @@
-package com.example.demo.resouces;
+package com.example.demo.resources;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +15,7 @@ import com.example.demo.services.UsuarioService;
 @Path("usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UsuarioResouce {
+public class UsuarioResource {
 
     @EJB
     UsuarioService usuarioService;

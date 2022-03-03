@@ -25,6 +25,10 @@ public class UsuarioEntity implements Serializable {
     @Column(nullable = false)
     private String senha;
 
+    @ManyToOne
+    @JoinColumn(name = "produto")
+    private ProdutoEntity produto;
+
     public UsuarioEntity() {}
 
     public UsuarioEntity(UsuarioDTO usuarioDTO) {
@@ -32,6 +36,7 @@ public class UsuarioEntity implements Serializable {
         this.nome = usuarioDTO.getNome();
         this.email = usuarioDTO.getEmail();
         this.senha = usuarioDTO.getSenha();
+        this.produto = usuarioDTO.getProduto();
     }
 
     public Long getId() {
@@ -64,6 +69,14 @@ public class UsuarioEntity implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public ProdutoEntity getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoEntity produto) {
+        this.produto = produto;
     }
 
 }
