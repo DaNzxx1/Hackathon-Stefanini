@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import com.example.demo.dto.ProdutoDTO;
+import com.example.demo.DTO.ProdutoDTO;
 
 @Entity
 @Table(name = "produto")

@@ -8,7 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.example.demo.dto.ProdutoDTO;
+import com.example.demo.DTO.ProdutoDTO;
 import com.example.demo.entities.ProdutoEntity;
 import com.example.demo.services.ProdutoService;
 

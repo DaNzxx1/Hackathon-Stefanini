@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 
 import com.example.demo.DAO.ProdutoDAO;
-import com.example.demo.dto.ProdutoDTO;
+import com.example.demo.DTO.ProdutoDTO;
 import com.example.demo.entities.ProdutoEntity;
 
 @Stateless

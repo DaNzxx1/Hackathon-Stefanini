@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.DTO;
 
 import javax.validation.constraints.NotNull;
 
