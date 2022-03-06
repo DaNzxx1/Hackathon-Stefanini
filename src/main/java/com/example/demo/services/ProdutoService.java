@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import com.example.demo.DTO.ProdutoDTO;
+import com.example.demo.dto.ProdutoDTO;
 import com.example.demo.entities.ProdutoEntity;
 import com.example.demo.repositories.ProdutoRepository;
 
