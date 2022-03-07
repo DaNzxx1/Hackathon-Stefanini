@@ -19,7 +19,12 @@ public class UsuarioService {
 
     //CRUD
     public List<UsuarioDTO> listarUsuarios() {
-        return usuarioRepository.listarUsuarios();
+        List<UsuarioDTO> listNull = null;
+        List<UsuarioDTO> listaUsuarios = usuarioRepository.listarUsuarios();
+        if (listaUsuarios.isEmpty()) {
+            return listNull;
+        }
+        return listaUsuarios;
     }
 
     public UsuarioDTO BuscarUsuarioPorId(Long idUsuario) {
@@ -58,8 +63,8 @@ public class UsuarioService {
 
     }
 
-    public void excluirUsuario(Long idUsuario) {
-        usuarioRepository.excluirUsuario(idUsuario);
+    public String excluirUsuario(Long idUsuario) {
+        return usuarioRepository.excluirUsuario(idUsuario);
     }
 
     //Outras funções

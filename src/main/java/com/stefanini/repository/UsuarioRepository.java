@@ -18,12 +18,8 @@ public class UsuarioRepository {
     UsuarioDAO usuarioDAO;
 
     public List<UsuarioDTO> listarUsuarios() {
-        List<UsuarioDTO> listNull = null;
-        List<UsuarioEntity> list = usuarioDAO.listAll();
-        if (list.isEmpty()) {
-            return listNull;
-        }
-        return list.stream().map(UsuarioDTO::new).collect(Collectors.toList());
+        List<UsuarioEntity> listaUsuarios = usuarioDAO.listAll();
+        return listaUsuarios.stream().map(UsuarioDTO::new).collect(Collectors.toList());
     }
 
     public UsuarioDTO BuscarUsuarioPorId(Long idUsuario) {
@@ -45,7 +41,9 @@ public class UsuarioRepository {
     }
 
     @Transactional
-    public void excluirUsuario(Long idUsuario) {
+    public String excluirUsuario(Long idUsuario) {
+        UsuarioEntity usuarioEntity = usuarioDAO.findById(idUsuario);
         usuarioDAO.delete(idUsuario);
+        return usuarioEntity.getNome();
     }
 }

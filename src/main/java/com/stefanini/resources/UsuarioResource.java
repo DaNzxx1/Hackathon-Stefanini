@@ -30,12 +30,9 @@ public class UsuarioResource {
     }
 
     @GET
-    @Path("/id/{idUsuario}")
+    @Path("/{idUsuario}")
     public Response buscarUsuarioPorId(@PathParam("idUsuario") Long idUsuario) {
         UsuarioDTO usuario = usuarioService.BuscarUsuarioPorId(idUsuario);
-        if (Objects.nonNull(usuario)) {
-            return Response.status(Response.Status.NO_CONTENT).entity(usuario).build();
-        }
         return Response.status(Response.Status.OK).entity(usuario).build();
     }
 
@@ -59,13 +56,13 @@ public class UsuarioResource {
     @DELETE
     @Path("/{idUsuario}")
     public Response excluirUsuario(@PathParam("idUsuario") Long idUsuario) {
-        usuarioService.excluirUsuario(idUsuario);
-        return Response.status(Response.Status.ACCEPTED).entity("Deletado!").build();
+        String nome = usuarioService.excluirUsuario(idUsuario);
+        return Response.status(Response.Status.ACCEPTED).entity(nome +" Deletado(a)!").build();
     }
 
     //Outras funções
     @GET
-    @Path("/aniversarios")
+    @Path("/aniversariantes")
     public Response mesAniversario() {
         List<UsuarioDTO> listaAniversariantes = usuarioService.mesAniversario();
         if (listaAniversariantes.isEmpty()) {
