@@ -17,23 +17,34 @@
     {
       "id": 1,
       "nome": "Danilo Lourenço",
-      "data_nascimento": "2003-09-17",
+      "login": "danzera",
+      "dataNascimento": "2003-09-17",
       "email": "danilo.03@outlook.com",
       "senha": "teste"
     },
     {
       "id": 4,
       "nome": "Marco Lucas",
-      "data_nascimento": "2022-03-05T01:19:35.574Z",
+      "login": "lucão",
+      "dataNascimento": "2022-03-05",
       "email": "marco@gmail.com",
       "senha": "marco123"
     },
     {
       "id": 5,
+      "login": "gabriel",
       "nome": "Gabriel Souza",
-      "data_nascimento": "2011-01-01",
+      "dataNascimento": "2011-01-01",
       "email": "souza2011@hotmail.com",
       "senha": "11"
+    },
+    {
+      "id": 6,
+      "nome": "Marcão Lucas Souza",
+      "login": "marcaoSouza",
+      "dataNascimento": "2000-01-10",
+      "email": "lucioSouza@gmail.com",
+      "senha": "marcaoSouza"
     }
   ]
 }

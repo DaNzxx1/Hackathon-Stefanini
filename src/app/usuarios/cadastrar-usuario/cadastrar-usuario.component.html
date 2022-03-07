@@ -2,19 +2,23 @@
 <hr>
 <div class="">
     <div class="row my-2">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" name="nome" id="nome" [(ngModel)]="usuario.nome" placeholder="Informe seu nome" class="form-control">
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" [(ngModel)]="usuario.email" placeholder="Informe seu email" class="form-control">
+        </div>
+        <div class="col-12 col-md-4">
             <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-            <input type="date" name="data_nascimento" [(ngModel)]="usuario.data_nascimento" id="dataNascimento" class="form-control">
+            <input type="date" name="data_nascimento" [(ngModel)]="usuario.dataNascimento" id="dataNascimento" class="form-control">
         </div>
     </div>
     <div class="row my-2">
         <div class="col-12 col-md-6">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" [(ngModel)]="usuario.email" placeholder="Informe seu email" class="form-control">
+            <label for="login" class="form-label">Login</label>
+            <input type="text" name="login" id="login" [(ngModel)]="usuario.login" placeholder="Informe seu Login" class="form-control">
         </div>
         <div class="col-12 col-md-6">
             <label for="senha" class="form-label">Senha</label>

@@ -11,6 +11,7 @@ import { ProdutoService } from './service/produto.service';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CadastrarUsuarioComponent } from './usuarios/cadastrar-usuario/cadastrar-usuario.component';
 import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario.component';
+import { UsuariosService } from './service/usuarios.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,10 @@ import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario
     HttpClientModule,
     FormsModule
   ],
-  providers: [ProdutoService],
+  providers: [
+    ProdutoService,
+    UsuariosService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

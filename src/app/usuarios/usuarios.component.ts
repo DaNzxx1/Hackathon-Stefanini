@@ -38,9 +38,9 @@ export class UsuariosComponent implements OnInit {
 
   excluirUsuario = (id: any) => {
     this.usuarioServico.excluir(id).subscribe(
-      success => console.log("Usuário excluído"),
-      error => console.log("Usuário não foi excluído"),
-      () => console.log("Requisição usuário excluir"),
+      /* success => console.log("Usuário excluído"),
+      error => console.log("Usuário não foi excluído"), */
+      (response) => console.log(response)
     );
 
     this.ngOnInit();

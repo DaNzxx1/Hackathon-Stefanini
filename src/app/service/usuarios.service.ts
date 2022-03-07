@@ -25,7 +25,7 @@ export class UsuariosService {
   }
 
   editar(usuario: Usuarios) {
-    return this.$http.put(`${this.API}/${usuario.id}`, usuario);
+    return this.$http.put(`${this.API}`, usuario);
   }
 
   excluir(id: any) {
