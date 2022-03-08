@@ -22,7 +22,10 @@ public class UsuarioService {
     }
 
     public UsuarioDTO BuscarUsuarioPorId(Long idUsuario) {
-        return usuarioRepository.BuscarUsuarioPorId(idUsuario);
+        UsuarioDTO usuario =  usuarioRepository.BuscarUsuarioPorId(idUsuario);
+        String senha = new String(Base64.getDecoder().decode(usuario.getSenha()));
+        usuario.setSenha(senha);
+        return usuario;
     }
 
     public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {

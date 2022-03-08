@@ -17,7 +17,7 @@ public class UsuarioDTO {
     @NotEmpty(message = "Nome não pode ser vazio!")
     private String nome;
 
-    @Size(min = 5, max = 20)
+    @Size(min = 4, max = 20)
     @NotEmpty(message = "Login não pode ser vazio!")
     private String login;
     
