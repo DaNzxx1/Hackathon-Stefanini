@@ -1,8 +1,5 @@
 package com.stefanini.resources;
 
-import java.util.List;
-import java.util.Objects;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
@@ -24,11 +21,7 @@ public class UsuarioResource {
     //CRUD
     @GET
     public Response listarUsuarios() {
-        List<UsuarioDTO> listaUsuarios = usuarioService.listarUsuarios();
-        if (Objects.nonNull(listaUsuarios)) {
-            return Response.status(Response.Status.OK).entity(listaUsuarios).build();
-        }
-        return Response.status(Response.Status.NO_CONTENT).entity(listaUsuarios).build();
+        return Response.status(Response.Status.OK).entity(usuarioService.listarUsuarios()).build();
     }
 
     @GET
@@ -59,22 +52,14 @@ public class UsuarioResource {
     @GET
     @Path("/aniversariantes")
     public Response aniversariantesDoMes() {
-        List<UsuarioDTO> listaAniversariantes = usuarioService.aniversariantesDoMes();
-        /* if (listaAniversariantes.isEmpty()) {
-            return Response.status(Response.Status.NO_CONTENT).entity(listaAniversariantes).build();
-        } */
-        return Response.status(Response.Status.OK).entity(listaAniversariantes).build();
+        return Response.status(Response.Status.OK).entity(usuarioService.aniversariantesDoMes()).build();
     }
 
-    @GET
+    /* @GET
     @Path("/provedores")
     public Response provedores() {
-        List<String> listaProvedores = usuarioService.provedores();
-        if (listaProvedores.isEmpty()) {
-            return Response.status(Response.Status.NO_CONTENT).entity(listaProvedores).build();
-        }   
-        return Response.status(Response.Status.OK).entity(listaProvedores).build();
-    }
+        return Response.status(Response.Status.OK).entity(usuarioService.provedores()).build();
+    } */
 
     @GET
     @Path("/inicial/{inicial}")

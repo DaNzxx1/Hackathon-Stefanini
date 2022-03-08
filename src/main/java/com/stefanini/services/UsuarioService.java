@@ -1,6 +1,5 @@
 package com.stefanini.services;
 
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
@@ -60,15 +59,9 @@ public class UsuarioService {
         return usuarioRepository.aniversariantesDoMes();
     }
 
-    public List<String> provedores() {
-        List<String> listaProvedores = new ArrayList<>();
-        for(UsuarioDTO usuario : usuarioRepository.listarUsuarios()) {
-            String provedor = usuario.getEmail().substring(usuario.getEmail().indexOf("@"));
-            listaProvedores.add(provedor);
-        }
-
-        return listaProvedores;
-    }
+    /* public List<String> provedores() {
+        return usuarioRepository.provedores();
+    } */
 
     public List<UsuarioDTO> listarIniciais(String inicial) {
         return usuarioRepository.listarIniciais(inicial);

@@ -53,6 +53,14 @@ public class UsuarioRepository extends GenericDAO<UsuarioEntity, Long> {
         return resultList.stream().map(UsuarioDTO::new).collect(Collectors.toList());
     }
 
+    /* public List<UsuarioDTO> provedores() {
+        Query nativeQuery = this.createNativeQuery("SELECT email , SUBSTRING(email, (INSTR(email, '%@%') +1 ), LENGTH(email)) as dominio_email 
+    FROM cursojavarest.usuarios WHERE INSTR(email, '%@%') > 0");
+        nativeQuery.setParameter(1, inicial+"%");
+        List<UsuarioEntity> resultList = nativeQuery.getResultList();
+        return resultList.stream().map(UsuarioDTO::new).collect(Collectors.toList());
+    } */
+
     public List<UsuarioDTO> listarIniciais(String inicial) {
         Query nativeQuery = this.createNativeQuery("SELECT * FROM usuarios WHERE nome LIKE ?");
         nativeQuery.setParameter(1, inicial+"%");
