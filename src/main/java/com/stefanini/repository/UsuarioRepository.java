@@ -1,49 +1,62 @@
 package com.stefanini.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import com.stefanini.dao.UsuarioDAO;
+import com.stefanini.dao.GenericDAO;
 import com.stefanini.dto.UsuarioDTO;
 import com.stefanini.entities.UsuarioEntity;
 
 @ApplicationScoped
-public class UsuarioRepository {
-    
-    @Inject
-    UsuarioDAO usuarioDAO;
+public class UsuarioRepository extends GenericDAO<UsuarioEntity, Long> {
 
+    //CRUD
     public List<UsuarioDTO> listarUsuarios() {
-        List<UsuarioEntity> listaUsuarios = usuarioDAO.listAll();
+        List<UsuarioEntity> listaUsuarios = this.listAll();
         return listaUsuarios.stream().map(UsuarioDTO::new).collect(Collectors.toList());
     }
 
     public UsuarioDTO BuscarUsuarioPorId(Long idUsuario) {
-        return new UsuarioDTO(usuarioDAO.findById(idUsuario));
+        return new UsuarioDTO(this.findById(idUsuario));
     }
 
     @Transactional
     public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuarioDTO);
-        usuarioDAO.save(usuarioEntity);
+        this.save(usuarioEntity);
         return new UsuarioDTO(usuarioEntity);
     }
 
     @Transactional
     public UsuarioDTO alterarUsuario(UsuarioDTO usuarioDTO) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuarioDTO);
-        usuarioDAO.update(usuarioEntity);
+        this.update(usuarioEntity);
         return new UsuarioDTO(usuarioEntity);
     }
 
     @Transactional
-    public String excluirUsuario(Long idUsuario) {
-        UsuarioEntity usuarioEntity = usuarioDAO.findById(idUsuario);
-        usuarioDAO.delete(idUsuario);
-        return usuarioEntity.getNome();
+    public void excluirUsuario(Long idUsuario) {
+        this.delete(idUsuario);
+    }
+
+    //Outras funções
+
+    public List<UsuarioDTO> aniversariantesDoMes() {
+        Query nativeQuery = this.createNativeQuery("SELECT * FROM usuarios WHERE month(data_nascimento) = ?");
+        nativeQuery.setParameter(1, LocalDate.now().getMonthValue());
+        List<UsuarioEntity> resultList = nativeQuery.getResultList();
+        return resultList.stream().map(UsuarioDTO::new).collect(Collectors.toList());
+    }
+
+    public List<UsuarioDTO> listarIniciais(String inicial) {
+        Query nativeQuery = this.createNativeQuery("SELECT * FROM usuarios WHERE nome LIKE ?");
+        nativeQuery.setParameter(1, inicial+"%");
+        List<UsuarioEntity> resultList = nativeQuery.getResultList();
+        return resultList.stream().map(UsuarioDTO::new).collect(Collectors.toList());
     }
 }

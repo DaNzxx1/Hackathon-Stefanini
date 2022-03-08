@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 import com.stefanini.dto.UsuarioDTO;
 
@@ -24,34 +21,27 @@ public class UsuarioEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "O campo Nome não pode ser vazio!")
     @Column(nullable = false, length = 50)
     private String nome;
     
-    @NotEmpty(message = "O campo Login não pode ser vazio!")
-    @Size(min = 5, max = 20)
     @Column(nullable = false, unique = true,  length = 20)
     private String login;
 
-    @Size(min = 10)
-    @NotEmpty(message = "O campo Email não pode ser vazio!")
-    @Email
     @Column(nullable = false)
     private String email;
 
-    @NotEmpty(message = "O campo Senha não pode ser vazio!")
     @Column(nullable = false)
     private String senha;
 
-    @Column(name = "data_nascimento", nullable = true)
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
     @CreationTimestamp
-    @Column(name = "data_criacao", nullable = true)
+    @Column(name = "data_criacao", nullable = false, updatable = false)
     private LocalDateTime dataCriacao;
 
     @UpdateTimestamp
-    @Column(name = "data_atualizacao", nullable = true)
+    @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
     public UsuarioEntity() { }

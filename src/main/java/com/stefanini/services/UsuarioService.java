@@ -1,9 +1,9 @@
 package com.stefanini.services;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,12 +19,7 @@ public class UsuarioService {
 
     //CRUD
     public List<UsuarioDTO> listarUsuarios() {
-        List<UsuarioDTO> listNull = null;
-        List<UsuarioDTO> listaUsuarios = usuarioRepository.listarUsuarios();
-        if (listaUsuarios.isEmpty()) {
-            return listNull;
-        }
-        return listaUsuarios;
+        return usuarioRepository.listarUsuarios();
     }
 
     public UsuarioDTO BuscarUsuarioPorId(Long idUsuario) {
@@ -32,51 +27,37 @@ public class UsuarioService {
     }
 
     public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuarioNull = null;
-        
-        if (usuarioDTO.getSenha().length() >= 4 && usuarioDTO.getSenha().length() <= 10) {
-            String senha = Base64.getEncoder().encodeToString(usuarioDTO.getSenha().getBytes());
-            usuarioDTO.setSenha(senha);
-            return usuarioRepository.salvarUsuario(usuarioDTO);
-
-        } else {
-            return usuarioNull;
+        if (Objects.nonNull(usuarioDTO.getId())) {
+            throw new RuntimeException("Ao cadastrar não mande ID");
         }
+        
+        String senha = Base64.getEncoder().encodeToString(usuarioDTO.getSenha().getBytes());
+        usuarioDTO.setSenha(senha);
+        return usuarioRepository.salvarUsuario(usuarioDTO);
 
     }
 
     public UsuarioDTO alterarUsuario(UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuario = usuarioRepository.BuscarUsuarioPorId(usuarioDTO.getId());
-        usuarioDTO.setDataCriacao(usuario.getDataCriacao());
-
-        if (usuarioDTO.getSenha().isEmpty()) {
-            usuarioDTO.setSenha(usuario.getSenha());
-
-            return usuarioRepository.alterarUsuario(usuarioDTO);
-
-        } else {
-            String senha = Base64.getEncoder().encodeToString(usuarioDTO.getSenha().getBytes());
-            usuarioDTO.setSenha(senha);
-
-            return usuarioRepository.alterarUsuario(usuarioDTO);
+        if (!Objects.nonNull(usuarioDTO.getId())) {
+            throw new RuntimeException("Ao alterar mande um ID");
         }
 
+        if (!usuarioDTO.getSenha().isEmpty()) {
+            //Criptografando a senha caso ela seja nova
+            String senha = Base64.getEncoder().encodeToString(usuarioDTO.getSenha().getBytes());
+            usuarioDTO.setSenha(senha);
+        }
+
+        return usuarioRepository.alterarUsuario(usuarioDTO);
     }
 
-    public String excluirUsuario(Long idUsuario) {
-        return usuarioRepository.excluirUsuario(idUsuario);
+    public void excluirUsuario(Long idUsuario) {
+        usuarioRepository.excluirUsuario(idUsuario);
     }
 
     //Outras funções
-    public List<UsuarioDTO> mesAniversario() {
-        List<UsuarioDTO> listarUsuarios = new ArrayList<>();
-        for (UsuarioDTO usuarioDTO : usuarioRepository.listarUsuarios()) {
-            LocalDate usuarioMonth = usuarioDTO.getDataNascimento();
-            if (usuarioMonth.getMonth() == LocalDate.now().getMonth()) {
-                listarUsuarios.add(usuarioDTO);
-            }
-        }
-        return listarUsuarios;
+    public List<UsuarioDTO> aniversariantesDoMes() {
+        return usuarioRepository.aniversariantesDoMes();
     }
 
     public List<String> provedores() {
@@ -89,17 +70,8 @@ public class UsuarioService {
         return listaProvedores;
     }
 
-    public List<String> listarIniciais(String inicial) {
-        List<String> listaNomes = new ArrayList<>();
-        for(UsuarioDTO usuario : usuarioRepository.listarUsuarios()) {
-            String inicialUsuario = usuario.getNome().valueOf(usuario.getNome().charAt(0));
-            
-            if (inicial.toLowerCase().equals(inicialUsuario.toLowerCase())) {
-                listaNomes.add(usuario.getNome());
-            }
-        }
-
-        return listaNomes;
+    public List<UsuarioDTO> listarIniciais(String inicial) {
+        return usuarioRepository.listarIniciais(inicial);
     }
 
 }

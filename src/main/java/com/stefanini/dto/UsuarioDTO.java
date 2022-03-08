@@ -3,6 +3,9 @@ package com.stefanini.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.stefanini.entities.UsuarioEntity;
 
 
@@ -10,18 +13,30 @@ public class UsuarioDTO {
 
     private Long id;
     
+    @Size(max = 50)
+    @NotEmpty(message = "Nome não pode ser vazio!")
     private String nome;
 
+    @Size(min = 5, max = 20)
+    @NotEmpty(message = "Login não pode ser vazio!")
+    private String login;
+    
+    @Size(min = 10)
+    @Email
+    @NotEmpty(message = "Email não pode ser vazio!")
     private String email;
 
-    private String login;
-
+    @Size(min = 4, max = 10)
+    @NotEmpty(message = "Senha não pode ser vazio!")
     private String senha;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
-
+    
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataCriacao;
-
+    
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataAtualizacao;
 
     public UsuarioDTO() { }
