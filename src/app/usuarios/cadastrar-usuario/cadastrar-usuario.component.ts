@@ -12,6 +12,8 @@ export class CadastrarUsuarioComponent implements OnInit {
 
   usuario: Usuarios = new Usuarios();
   erros: Array<String> = [];
+  mostrarErros: boolean = false;
+  disabled: boolean = false;
 
   constructor(
     private router: Router,
@@ -29,6 +31,14 @@ export class CadastrarUsuarioComponent implements OnInit {
         for (let index = 0; index < error.error.parameterViolations.length; index++) {
           this.erros.push(error.error.parameterViolations[index].message);
         }
+        this.mostrarErros = true;
+        this.disabled = true
+        
+        setTimeout(() => {
+          this.mostrarErros = false
+          this.erros = [];
+          this.disabled = false
+        }, 5000);
       },
       () => console.log("Requisição usuário novo completa!")
     );

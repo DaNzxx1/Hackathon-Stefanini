@@ -1,9 +1,11 @@
 <h2 class="text-center m-3">Cadastrar Usuário</h2>
 <hr>
-<div *ngFor="let erro of erros">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{erro}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div *ngIf="mostrarErros">
+    <div *ngFor="let erro of erros">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{erro}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
 </div>
 <div class="">
@@ -34,6 +36,6 @@
 
     <div class="col-12 text-end">
         <a href="#" [routerLink]="['/usuarios']" class="btn btn-secondary">Voltar</a>
-        <button type="submit" (click)="adicionar()" class="btn btn-success m-4">Novo</button>
+        <button type="submit" (click)="adicionar()" [disabled]="disabled" class="btn btn-success m-4">Novo</button>
     </div>
 </div>
