@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuarios } from '../Objetos/Usuarios';
-import { UsuariosService } from '../service/usuarios.service';
+import { Usuarios } from '../../Objetos/Usuarios';
+import { UsuariosService } from '../../service/usuarios.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,6 +12,7 @@ export class UsuariosComponent implements OnInit {
 
   usuarios: Array<Usuarios> = [];
   carregarLoading: boolean = false;
+  aniversariantes: Array<Usuarios> = [];
 
   constructor(private usuarioServico: UsuariosService , private router: Router) { }
 
@@ -41,6 +42,12 @@ export class UsuariosComponent implements OnInit {
       error => console.log("Usuário não foi excluído"),
       () => console.log()
     );
+  }
+
+  aniversariantesDoMes = () => {
+    this.usuarioServico.aniversariantesMes().subscribe(response => {
+      this.aniversariantes = response;
+    });
   }
 
 }

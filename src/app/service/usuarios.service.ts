@@ -32,4 +32,8 @@ export class UsuariosService {
     return this.$http.delete(`${this.API}/${id}`);
   }
 
+  aniversariantesMes() {
+    return this.$http.get<Usuarios[]>(`${this.API}/aniversariantes`);
+  }
+
 }

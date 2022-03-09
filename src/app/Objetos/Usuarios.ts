@@ -5,7 +5,7 @@ export class Usuarios {
     public id: any | undefined; 
     public nome: String | undefined; 
     public login: String | undefined;
-    public dataNascimento: Date | undefined; 
     public email: String | undefined; 
     public senha: String | undefined;
+    public dataNascimento: Date | undefined; 
 }
