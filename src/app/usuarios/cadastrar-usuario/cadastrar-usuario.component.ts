@@ -26,8 +26,10 @@ export class CadastrarUsuarioComponent implements OnInit {
 
   adicionar = () => {
     this.usuarioService.adicionar(this.usuario).subscribe(
-      success => this.navegar('Sucesso usuarios'),
+      success => this.navegar('usuarios'),
       error => {
+        console.log(error);
+        
         for (let index = 0; index < error.error.parameterViolations.length; index++) {
           this.erros.push(error.error.parameterViolations[index].message);
         }
