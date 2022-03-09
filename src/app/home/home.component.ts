@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Produto } from '../Objetos/Produto';
-import { ProdutoService } from '../service/produto.service';
+import { Usuarios } from '../Objetos/Usuarios';
+import { UsuariosService } from '../service/usuarios.service';
 
 @Component({
   selector: 'app-home',
@@ -10,38 +10,19 @@ import { ProdutoService } from '../service/produto.service';
 })
 export class HomeComponent implements OnInit {
 
-  produtos: Array<Produto> = [];
-  carregarLoading: boolean = false;
+  usuarios: Array<Usuarios> = [];
+  
 
-  constructor(private produtoService: ProdutoService, private router: Router) { }
+  constructor(private usuarioService: UsuariosService) { }
 
   ngOnInit(): void {
-    this.listar();
-    
+    this.listaUsuario();
   }
 
-  listar() {
-    this.produtoService.listar().subscribe(produtos => {
-      setTimeout(() => {
-        this.produtos = produtos;
-        this.carregarLoading = true
-  
-      }, 1000);
+  listaUsuario = () => {
+    this.usuarioService.listar().subscribe((response) => {
+      this.usuarios = response;
     });
-  }
-
-  excluirItem = (id: any) => {
-    this.produtoService.excluirItem(id).subscribe(
-      success => console.log("Deletado com sucesso!"),
-      error => console.log("Não excluiu!"),
-      () => console.log("Requisição completa!")
-      )
-      
-      this.ngOnInit();
-  }
-
-  editarItem = (id: any) => {
-    this.router.navigate(['/usuarios', id]);
-  }
+  } 
 
 }

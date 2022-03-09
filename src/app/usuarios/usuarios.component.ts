@@ -11,7 +11,6 @@ import { UsuariosService } from '../service/usuarios.service';
 export class UsuariosComponent implements OnInit {
 
   usuarios: Array<Usuarios> = [];
-  //usuarios: any;
   carregarLoading: boolean = false;
 
   constructor(private usuarioServico: UsuariosService , private router: Router) { }
@@ -38,12 +37,10 @@ export class UsuariosComponent implements OnInit {
 
   excluirUsuario = (id: any) => {
     this.usuarioServico.excluir(id).subscribe(
-      /* success => console.log("Usuário excluído"),
-      error => console.log("Usuário não foi excluído"), */
-      (response) => console.log(response)
+      success => this.ngOnInit(),
+      error => console.log("Usuário não foi excluído"),
+      () => console.log()
     );
-
-    this.ngOnInit();
   }
 
 }

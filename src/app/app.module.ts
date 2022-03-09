@@ -6,21 +6,26 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { CadastroComponent } from './cadastro/cadastro.component';
-import { ProdutoService } from './service/produto.service';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CadastrarUsuarioComponent } from './usuarios/cadastrar-usuario/cadastrar-usuario.component';
 import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario.component';
 import { UsuariosService } from './service/usuarios.service';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { CardComponent } from './card/card.component';
+import { MiniTabelaComponent } from './mini-tabela/mini-tabela.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CadastroComponent,
     UsuariosComponent,
     CadastrarUsuarioComponent,
     EditarUsuarioComponent,
+    HeaderComponent,
+    FooterComponent,
+    CardComponent,
+    MiniTabelaComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,6 @@ import { UsuariosService } from './service/usuarios.service';
     FormsModule
   ],
   providers: [
-    ProdutoService,
     UsuariosService,
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,13 @@
 <h2 class="text-center m-3">Editar Usuário: <span class="fw-normal">{{usuario.nome}}</span></h2>
 <hr>
+<div *ngIf="mostrarErros">
+    <div *ngFor="let erro of erros">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="erro">
+            <strong>{{erro}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
 <div class="">
     <div class="row my-2">
         <div class="col-12 col-md-4">
@@ -12,7 +20,7 @@
         </div>
         <div class="col-12 col-md-4">
             <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-            <input type="date" name="dataNascimento" [(ngModel)]="data" id="dataNascimento" class="form-control">
+            <input type="date" name="dataNascimento" [(ngModel)]="usuario.dataNascimento" id="dataNascimento" class="form-control">
         </div>
     </div>
     <div class="row my-2">
@@ -28,6 +36,6 @@
 
     <div class="col-12 text-end">
         <a href="#" [routerLink]="['/usuarios']" class="btn btn-secondary">Voltar</a>
-        <button type="submit" (click)="alterar()" class="btn btn-success m-4">Editar</button>
+        <button type="submit" (click)="alterar()" [disabled]="disabled" class="btn btn-success m-4">Editar</button>
     </div>
 </div>

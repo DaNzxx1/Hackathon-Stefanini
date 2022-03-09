@@ -11,6 +11,7 @@ import { UsuariosService } from 'src/app/service/usuarios.service';
 export class CadastrarUsuarioComponent implements OnInit {
 
   usuario: Usuarios = new Usuarios();
+  erros: Array<String> = [];
 
   constructor(
     private router: Router,
@@ -23,11 +24,13 @@ export class CadastrarUsuarioComponent implements OnInit {
 
   adicionar = () => {
     this.usuarioService.adicionar(this.usuario).subscribe(
-      /* success => this.navegar('usuarios'),
-      error => console.log("Usuário não criou!"), */
-      (response) => {
-        console.log("Requisição usuário novo completa!")
-      }
+      success => this.navegar('Sucesso usuarios'),
+      error => {
+        for (let index = 0; index < error.error.parameterViolations.length; index++) {
+          this.erros.push(error.error.parameterViolations[index].message);
+        }
+      },
+      () => console.log("Requisição usuário novo completa!")
     );
   }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import { Usuarios } from 'src/app/Objetos/Usuarios';
 import { UsuariosService } from 'src/app/service/usuarios.service';
 
@@ -13,7 +12,9 @@ export class EditarUsuarioComponent implements OnInit {
 
   id: any;
   usuario: Usuarios = new Usuarios();
-  data: any;
+  erros: Array<String> = [];
+  mostrarErros: boolean = false;
+  disabled: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,18 +30,27 @@ export class EditarUsuarioComponent implements OnInit {
         this.usuarioService.buscarPorId(this.id).subscribe(usuario => {
           this.usuario = usuario;
           
-          this.data = moment(usuario.dataNascimento).add(-1, 'months').format('yyyy-MM-DD');
         });
       }
     });
   }
 
   alterar = () => {
-    this.usuario.dataNascimento = this.data;
-    
     this.usuarioService.editar(this.usuario).subscribe(
       success => this.navegar('usuarios'),
-      error => console.log("Não editou!"),
+      error => {
+        for (let index = 0; index < error.error.parameterViolations.length; index++) {
+          this.erros.push(error.error.parameterViolations[index].message);
+        }
+        this.mostrarErros = true;
+        this.disabled = true
+        
+        setTimeout(() => {
+          this.mostrarErros = false
+          this.erros = [];
+          this.disabled = false
+        }, 5000);
+      },
       () => console.log("Requisição editar completa!")
     );
   }

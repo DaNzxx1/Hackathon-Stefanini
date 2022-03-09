@@ -1,5 +1,11 @@
 <h2 class="text-center m-3">Cadastrar Usuário</h2>
 <hr>
+<div *ngFor="let erro of erros">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{erro}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
 <div class="">
     <div class="row my-2">
         <div class="col-12 col-md-4">
