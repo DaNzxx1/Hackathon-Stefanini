@@ -55,11 +55,11 @@ public class UsuarioResource {
         return Response.status(Response.Status.OK).entity(usuarioService.aniversariantesDoMes()).build();
     }
 
-    /* @GET
+    @GET
     @Path("/provedores")
     public Response provedores() {
         return Response.status(Response.Status.OK).entity(usuarioService.provedores()).build();
-    } */
+    }
 
     @GET
     @Path("/inicial/{inicial}")

@@ -13,20 +13,20 @@ public class UsuarioDTO {
 
     private Long id;
     
-    @Size(max = 50)
+    @Size(max = 50, message = "Tamanho máximo do Nome é 50")
     @NotEmpty(message = "Nome não pode ser vazio!")
     private String nome;
 
-    @Size(min = 4, max = 20)
+    @Size(min = 5, max = 20, message = "Tamanho do Login deve ser entre 5 e 20")
     @NotEmpty(message = "Login não pode ser vazio!")
     private String login;
     
-    @Size(min = 10)
+    @Size(min = 10, max = 100, message = "Tamanho do Email deve ser entre 10 e 100")
     @Email
     @NotEmpty(message = "Email não pode ser vazio!")
     private String email;
 
-    @Size(min = 4, max = 10)
+    @Size(min = 4, max = 10, message = "Tamanho da Senha deve ser entre 4 e 10")
     @NotEmpty(message = "Senha não pode ser vazio!")
     private String senha;
 

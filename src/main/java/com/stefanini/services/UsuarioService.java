@@ -62,9 +62,9 @@ public class UsuarioService {
         return usuarioRepository.aniversariantesDoMes();
     }
 
-    /* public List<String> provedores() {
+    public List<UsuarioDTO> provedores() {
         return usuarioRepository.provedores();
-    } */
+    }
 
     public List<UsuarioDTO> listarIniciais(String inicial) {
         return usuarioRepository.listarIniciais(inicial);
