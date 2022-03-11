@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { usuarioLogin } from 'src/app/login/usuarioLogin';
 import { environment } from 'src/environments/environment';
-import { Usuarios } from '../objetos/Usuarios';
+import { Usuarios } from '../objetos/usuarios';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class UsuariosService {
   constructor(private $http: HttpClient) { }
 
   listar() {
+    console.log(this.$http.get<Usuarios[]>(`${this.API}`));
+    
     return this.$http.get<Usuarios[]>(`${this.API}`);
   }
 
@@ -30,6 +33,10 @@ export class UsuariosService {
 
   excluir(id: any) {
     return this.$http.delete(`${this.API}/${id}`);
+  }
+
+  login(usuarioLogin: usuarioLogin): any {
+    return this.$http.post<Usuarios>(`${this.API}/login`, usuarioLogin);
   }
 
   aniversariantesMes() {

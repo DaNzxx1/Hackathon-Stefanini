@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Usuarios } from 'src/app/usuarios/objetos/Usuarios';
+import { Usuarios } from 'src/app/usuarios/objetos/usuarios';
 import { UsuariosService } from 'src/app/usuarios/service/usuarios.service';
 
 @Component({
@@ -41,7 +41,9 @@ export class EditarUsuarioComponent implements OnInit {
     this.usuarioService.editar(this.usuario).subscribe(
       success => this.navegar('usuarios'),
       error => {
-        error.error.parameterViolations.forEach((usuario: String) => { this.erros.push(usuario) });
+        console.log(error);
+        
+        error.error.parameterViolations.forEach((usuario: any) => { this.erros.push(usuario.message) });
         this.mostrarErros = true;
         this.disabled = true
         
