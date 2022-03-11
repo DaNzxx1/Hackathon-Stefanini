@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Usuarios } from 'src/app/Objetos/Usuarios';
-import { UsuariosService } from 'src/app/service/usuarios.service';
+import { Usuarios } from 'src/app/usuarios/objetos/Usuarios';
+import { UsuariosService } from 'src/app/usuarios/service/usuarios.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -29,7 +29,9 @@ export class EditarUsuarioComponent implements OnInit {
         this.id = parametros['id'];
         this.usuarioService.buscarPorId(this.id).subscribe(usuario => {
           this.usuario = usuario;
-          
+        },
+        error => {
+          this.router.navigate(['usuarios']);
         });
       }
     });
@@ -39,9 +41,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.usuarioService.editar(this.usuario).subscribe(
       success => this.navegar('usuarios'),
       error => {
-        for (let index = 0; index < error.error.parameterViolations.length; index++) {
-          this.erros.push(error.error.parameterViolations[index].message);
-        }
+        error.error.parameterViolations.forEach((usuario: String) => { this.erros.push(usuario) });
         this.mostrarErros = true;
         this.disabled = true
         

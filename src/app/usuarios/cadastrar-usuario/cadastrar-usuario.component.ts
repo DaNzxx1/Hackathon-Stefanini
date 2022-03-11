@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuarios } from 'src/app/Objetos/Usuarios';
-import { UsuariosService } from 'src/app/service/usuarios.service';
+import { Usuarios } from 'src/app/usuarios/objetos/Usuarios';
+import { UsuariosService } from 'src/app/usuarios/service/usuarios.service';
 
 @Component({
   selector: 'app-cadastrar-usuario',
@@ -28,11 +28,7 @@ export class CadastrarUsuarioComponent implements OnInit {
     this.usuarioService.adicionar(this.usuario).subscribe(
       success => this.navegar('usuarios'),
       error => {
-        console.log(error);
-        
-        for (let index = 0; index < error.error.parameterViolations.length; index++) {
-          this.erros.push(error.error.parameterViolations[index].message);
-        }
+        error.error.parameterViolations.forEach((usuario: String) => { this.erros.push(usuario) });
         this.mostrarErros = true;
         this.disabled = true
         

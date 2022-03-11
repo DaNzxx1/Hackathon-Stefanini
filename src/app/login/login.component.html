@@ -1,0 +1,15 @@
+<div class="m-2">
+    <h2 class="text-center">Login</h2>
+    <div class="row my-2">
+        <div class="col-12 col-md-12">
+            <label for="login" class="form-label">Login</label>
+            <input type="text" name="login" id="login" [(ngModel)]="usuarioLogin.login" placeholder="Informe seu Login" class="form-control">
+        </div>
+        <div class="col-12 col-md-12">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" name="senha" id="senha" [(ngModel)]="usuarioLogin.senha" placeholder="Insira sua senha" class="form-control">
+        </div>
+    </div>
+    
+    <button type="submit" (click)="login()" class="btn btn-success">Entrar</button>
+</div>

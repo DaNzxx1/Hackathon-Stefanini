@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
-import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
-import { CadastrarUsuarioComponent } from './usuarios/cadastrar-usuario/cadastrar-usuario.component';
-import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'usuarios', component: UsuariosComponent},
-  {path: 'usuarios/novo', component: CadastrarUsuarioComponent},
-  {path: 'usuarios/:id', component: EditarUsuarioComponent},
+
+  {path: 'login', component: LoginComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'home', canActivate: [AuthGuard]},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuarios/usuario.module').then(m => m.UsuarioModule),
+    canActivate: [AuthGuard]
+  }
+  
 ];
 
 @NgModule({
