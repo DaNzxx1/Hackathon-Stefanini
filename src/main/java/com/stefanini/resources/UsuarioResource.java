@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
+import com.stefanini.dto.LoginDTO;
 import com.stefanini.dto.UsuarioDTO;
 import com.stefanini.services.UsuarioService;
 
@@ -27,7 +28,7 @@ public class UsuarioResource {
     @GET
     @Path("/{idUsuario}")
     public Response buscarUsuarioPorId(@PathParam("idUsuario") Long idUsuario) {
-        UsuarioDTO usuario = usuarioService.BuscarUsuarioPorId(idUsuario);
+        UsuarioDTO usuario = usuarioService.buscarUsuarioPorId(idUsuario);
         return Response.status(Response.Status.OK).entity(usuario).build();
     }
 
@@ -46,6 +47,12 @@ public class UsuarioResource {
     public Response excluirUsuario(@PathParam("idUsuario") Long idUsuario) {
         usuarioService.excluirUsuario(idUsuario);
         return Response.status(Response.Status.ACCEPTED).build();
+    }
+
+    @POST
+    @Path("/login")
+    public Response login(@Valid @NotNull LoginDTO login) {
+        return Response.status(Response.Status.OK).entity(usuarioService.login(login)).build();
     }
 
     //Outras funções

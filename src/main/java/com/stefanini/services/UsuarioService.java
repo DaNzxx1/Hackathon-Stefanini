@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.stefanini.dto.LoginDTO;
 import com.stefanini.dto.UsuarioDTO;
 import com.stefanini.repository.UsuarioRepository;
 
@@ -21,8 +22,8 @@ public class UsuarioService {
         return usuarioRepository.listarUsuarios();
     }
 
-    public UsuarioDTO BuscarUsuarioPorId(Long idUsuario) {
-        UsuarioDTO usuario =  usuarioRepository.BuscarUsuarioPorId(idUsuario);
+    public UsuarioDTO buscarUsuarioPorId(Long idUsuario) {
+        UsuarioDTO usuario =  usuarioRepository.buscarUsuarioPorId(idUsuario);
         String senha = new String(Base64.getDecoder().decode(usuario.getSenha()));
         usuario.setSenha(senha);
         return usuario;
@@ -55,6 +56,12 @@ public class UsuarioService {
 
     public void excluirUsuario(Long idUsuario) {
         usuarioRepository.excluirUsuario(idUsuario);
+    }
+
+    public UsuarioDTO login(LoginDTO login) {
+        String senha = Base64.getEncoder().encodeToString(login.getSenha().getBytes());
+        login.setSenha(senha);
+        return usuarioRepository.login(login);
     }
 
     //Outras funções
